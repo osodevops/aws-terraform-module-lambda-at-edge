@@ -3,6 +3,7 @@
  *
  */
 resource "aws_s3_bucket_object" "artifact" {
+  provider               = aws.cloudfront
   bucket                 = data.aws_s3_bucket.artifact_bucket.id
   key                    = "${var.function_name}.zip"
   source                 = data.archive_file.zip_file_for_lambda.output_path
