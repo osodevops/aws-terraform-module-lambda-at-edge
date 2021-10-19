@@ -1,0 +1,43 @@
+---
+#
+# This is the canonical configuration for the `README.md`
+# Run `make readme` to rebuild the `README.md`
+#
+
+# Name of this project
+name: "AWS Lambda@Edge Cloudfront deployment"
+
+# Short description of this project
+description: |-
+  This module supports any type of Lambda Function supported by Edge, including NodeJs and Python functions.
+
+# Canonical GitHub repo
+github_repo: osodevops/aws-terraform-module-lambda-at-edge
+
+# How to use this project
+usage: |-
+  [Lambda@Edge](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-at-the-edge.html) is an extension of AWS Lambda, a compute service that lets you execute functions that customize the content that CloudFront delivers.
+  ### Requirements
+  You must use a versioned S3 bucket for your deployment artifacts
+
+
+# Example usage
+examples: |-
+  You just point it at a set of local file globs and it handles bundling your code and deploying it.
+  ```hcl
+      module "security_header_lambda" {
+        source                          = "it::ssh://git@github.com/aws-terraform-module-lambda-at-edge.git"
+        function_name                   = "security_headers"
+        environment                     = "p"
+        description                     = "Adds security headers to the response"
+        lambda_runtime                  = "nodejs12.x"
+        s3_artifact_bucket_name         = "lambda-edge-us-east-1-bucket-app"
+        lambda_code_source_dir          = "./scripts/security_headers" # script from AWS blog below
+        common_tags                     = var.common_tags
+      }
+  ```
+
+related:
+  - name: "Adding HTTP Security Headers Using Lambda@Edge and Amazon CloudFront"
+    description: "This module can be used to append HTTP request headers as shown in the AWS example"
+    url: "https://aws.amazon.com/blogs/networking-and-content-delivery/adding-http-security-headers-using-lambdaedge-and-amazon-cloudfront/"
