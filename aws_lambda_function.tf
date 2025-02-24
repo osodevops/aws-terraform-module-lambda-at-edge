@@ -5,8 +5,8 @@ resource "aws_lambda_function" "lambda" {
   provider      = aws.cloudfront
   # Find the file from S3
   s3_bucket         = data.aws_s3_bucket.artifact_bucket.id
-  s3_key            = aws_s3_bucket_object.artifact.id
-  s3_object_version = aws_s3_bucket_object.artifact.version_id
+  s3_key            = aws_s3_object.artifact.id
+  s3_object_version = aws_s3_object.artifact.version_id
 
   publish = true
   handler = var.lambda_handler
